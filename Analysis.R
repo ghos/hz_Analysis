@@ -1,14 +1,14 @@
-#³õÊ¼»¯
+#åˆå§‹åŒ–
 library(DMwR)
 library(car)
 
-#¶ÁÈ¡Êı¾İÎÄ¼ş
+#è¯»å–æ•°æ®æ–‡ä»¶
 hz_Analysis<-read.table("d:/Analysis.txt",,col.names=c('season','riverSize','waterSpeed','maxPH','minO2','avrCL','avrNO3','avrNH4','avrPO43','avrPO4','avrYLS','a1','a2','a3','a4','a5','a6','a7'),na.strings=c('XXXXXXX'))
 
-#ÕªÒª
+#æ‘˜è¦
 #summary(hz_Analysis)
 
-#Ö±·½Í¼
+#ç›´æ–¹å›¾
 hzHistogram<-function()
 {
 	par(mfrow=c(2,4))
@@ -22,7 +22,7 @@ hzHistogram<-function()
 	hist(hz_Analysis$avrYLS,probability=T)  
 }
 
-#qqÍ¼ÑéÖ¤ÕıÌ¬·Ö²¼
+#qqå›¾éªŒè¯æ­£æ€åˆ†å¸ƒ
 hzQQplot<-function()
 {
 	par(mfrow=c(2,4))
@@ -36,7 +36,7 @@ hzQQplot<-function()
 	qqPlot(hz_Analysis$avrYLS, main='QQplot of avrYLS') 
 }
 
-#µ¥¶ÀµÄºĞÍ¼
+#å•ç‹¬çš„ç›’å›¾
 hzBoxplot<-function()
 {
 	par(mfrow=c(2,4))
@@ -50,23 +50,23 @@ hzBoxplot<-function()
 	boxplot(hz_Analysis$avrYLS,ylab="avrYLS")
 }
 
-#Ìõ¼şºĞÍ¼
+#æ¡ä»¶ç›’å›¾
 hzBwplot<-function(arg1,arg2)
 {
 	bwplot(arg1~arg2,data=hz_Analysis,ylab = 'Y',xlab='X'	)
 }
 
-#½«È±Ê§²¿·ÖÌŞ³ı
+#å°†ç¼ºå¤±éƒ¨åˆ†å‰”é™¤
 #hz_Analysis[!complete.cases(hz_Analysis),]
 #nrow(hz_Analysis[!complete.cases(hz_Analysis),])
 #hz_Analysis <- na.omit(hz_Analysis) 
 
-#ÓÃ×î¸ßÆµÂÊÖµÀ´Ìî²¹È±Ê§Öµ
+#ç”¨æœ€é«˜é¢‘ç‡å€¼æ¥å¡«è¡¥ç¼ºå¤±å€¼
 #table(a)
 #max(table(a))
 #hz_Analysis[is.na(hz_Analysis$minO2),'minO2'] <- 9.8
 
-#Í¨¹ıÊôĞÔµÄÏà¹Ø¹ØÏµÀ´Ìî²¹È±Ê§
+#é€šè¿‡å±æ€§çš„ç›¸å…³å…³ç³»æ¥å¡«è¡¥ç¼ºå¤±
 #options(digits=1)
 #cor(hz_Analysis[,4:18],use="complete.obs")
 #symnum(cor(hz_Analysis[,4:18],use="complete.obs"))
@@ -74,7 +74,9 @@ hzBwplot<-function(arg1,arg2)
 #hz_Analysis<-hz_Analysis[-manyNAs(hz_Analysis),]
 #lm(avrPO43~avrPO4,data=hz_Analysis)
 
-#Í¨¹ıÊı¾İ¶ÔÏóÖ®¼äµÄÏàËÆĞÔÀ´Ìî²¹È±Ê§Öµ
+#é€šè¿‡æ•°æ®å¯¹è±¡ä¹‹é—´çš„ç›¸ä¼¼æ€§æ¥å¡«è¡¥ç¼ºå¤±å€¼
 #hz_Analysis<-hz_Analysis[-manyNAs(hz_Analysis),]
 #hz_Analysis<-knnImputation(hz_Analysis,k=10)
 #hz_Analysis<-knnImputation(hz_Analysis,k=10,meth="median")
+
+#write.table(hz_Analysis,file="d:/123.txt",append=FALSE,quote=TRUE,sep="",eol="\r\n",na="NA",dec=".",row.names=TRUE,col.names=TRUE,qmethod=c("escape","double"),fileEncoding="")
